@@ -17,7 +17,7 @@ export default function Footer() {
 					<li>
 						<a href="/toc" className="flex gap-2 items-center underline">
 							<svg
-								aria-hidden="true"
+								ariaHidden="true"
 								focusable="false"
 								className="w-4 h-4"
 								role="img"

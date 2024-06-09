@@ -2,7 +2,7 @@ export default function Loader() {
 	return (
 		<div role="status" className="flex justify-center items-center">
 			<svg
-				aria-hidden="true"
+				ariaHidden="true"
 				className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-200"
 				viewBox="0 0 100 101"
 				fill="none"

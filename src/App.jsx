@@ -16,7 +16,7 @@ const sideBardLinks = [
 		name: "Last updates",
 		icon: (
 			<svg
-				aria-hidden="true"
+				ariaHidden="true"
 				focusable="false"
 				className="w-4 h-4"
 				role="img"
@@ -34,7 +34,7 @@ const sideBardLinks = [
 		name: "Register of sponsors",
 		icon: (
 			<svg
-				aria-hidden="true"
+				ariaHidden="true"
 				focusable="false"
 				data-prefix="fas"
 				data-icon="certificate"
@@ -54,7 +54,7 @@ const sideBardLinks = [
 		name: "About",
 		icon: (
 			<svg
-				aria-hidden="true"
+				ariaHidden="true"
 				focusable="false"
 				className="w-4 h-4"
 				role="img"
@@ -131,14 +131,17 @@ function App() {
 				<div className="flex-1 max-w-xs">
 					<ul className="flex flex-col p-6 bg-white gap-2">
 						{sideBardLinks.map((link) => (
-							<li className="flex gap-2 items-center underline cursor-pointer">
+							<li
+								className="flex gap-2 items-center underline cursor-pointer"
+								key={link.name}
+							>
 								<span>{link.icon}</span>
 								<span>{link.name}</span>
 							</li>
 						))}
 					</ul>
 				</div>
-				<div className="flex-1">
+				<div className="flex-1 flex flex-col gap-6">
 					<div>
 						<h1 className="text-xl mb-2 font-bold">
 							Updated Licences on{" "}
@@ -156,10 +159,10 @@ function App() {
 						</div>
 					</div>
 
-					<div>
-						{historyData.map((history) => (
+					{historyData.map((history) => (
+						<div>
 							<>
-								<h1 className="max-w-6xl mx-auto text-2xl mb-10 font-bold">
+								<h1 className="text-xl mb-2 font-bold">
 									Updated Licences on{" "}
 									{new Date(history.updateDate).toLocaleDateString("en-GB", {
 										day: "2-digit",
@@ -167,14 +170,16 @@ function App() {
 										year: "numeric",
 									})}
 								</h1>
+								<hr className="w-full h-[2px] bg-gray-400 mb-4" />
+
 								<div className="max-w-6xl mx-auto flex gap-6">
 									<NameList title="Added" list={history.additions} />
 									<NameList title="Updated" list={history.updates} />
 									<NameList title="Removed" list={history.removals} />
 								</div>
 							</>
-						))}
-					</div>
+						</div>
+					))}
 
 					<div className="w-full flex justify-center items-center mt-10">
 						{noMoreHistory ? (

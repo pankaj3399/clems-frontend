@@ -4,9 +4,9 @@ export default function Header() {
 			<h1 className="font-bold flex gap-4">
 				<span>
 					<svg
-						aria-hidden="true"
+						ariaHidden="true"
 						focusable="false"
-						class="w-8 h-8"
+						className="w-8 h-8"
 						role="img"
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 512 512"
