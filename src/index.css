@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	overflow-x: hidden;
+	min-width: 100vw;
+	min-height: 100vh;
+}
+
+a {
+	@apply underline hover:text-red-400;
+}
