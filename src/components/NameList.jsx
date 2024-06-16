@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import Loader from "./Loader"
+import Modal from "./Modal"
 
 const AdditionIcon = () => (
 	<svg
@@ -52,12 +53,23 @@ const RemovedIcon = () => (
 
 export default function NameList({ title = "", list = [] }) {
 	const [showCounter, setShowCounter] = useState(25)
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedRow, setSelectedRow] = useState({});
 
 	function onSetShowCounter() {
 		if (showCounter < list.length) {
 			setShowCounter(showCounter + 25)
 		}
 	}
+
+	const openModal = (data) => {
+		setSelectedRow(data);
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	function getIconTextColor(title) {
 		switch (title) {
@@ -102,6 +114,7 @@ export default function NameList({ title = "", list = [] }) {
 					<li
 						key={row._id}
 						className="cursor-pointer underline hover:text-red-400"
+						onClick={() => { openModal(row) }}
 					>
 						{row.name}
 					</li>
@@ -111,16 +124,23 @@ export default function NameList({ title = "", list = [] }) {
 					<Loader />
 				</div>
 			)}
+			<Modal
+				isOpen={isModalOpen}
+				closeModal={closeModal}
+				data={selectedRow}
+			/>
 
 			{showCounter <= list.length && (
-				<div
-					className={`hover:text-red-500 cursor-pointer text-sm ${getIconTextColor(
-						title
-					)}`}
-					onClick={onSetShowCounter}
-				>
-					... and {list.length - showCounter} more
-				</div>
+				<>
+					<div
+						className={`hover:text-red-500 cursor-pointer text-sm ${getIconTextColor(
+							title
+						)}`}
+						onClick={onSetShowCounter}
+					>
+						... and {list.length - showCounter} more
+					</div>
+				</>
 			)}
 		</ul>
 	)
