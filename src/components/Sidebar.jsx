@@ -81,7 +81,7 @@ function Sidebar() {
         window.addEventListener('resize', handleResize);
         // Cleanup the event listener on component unmount
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [window.innerWidth]);
 
     return (
         <div className="w-full">
@@ -93,12 +93,12 @@ function Sidebar() {
                 {isOpen ? (
                   
                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
                    </svg>
                 ) : (
                     
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
                 </svg>
                 )}
             </button>
@@ -110,7 +110,7 @@ function Sidebar() {
                         <div
                             className="flex gap-2 items-center cursor-pointer hover:text-gray-800 hover:underline"
                             key={link.name}
-                            onClick={() => { navigate(link.path); setIsOpen(false); }}
+                            onClick={() => { navigate(link.path) }}
                         >   
                             <div className="text-gray-800">{link.icon}</div>
                             <div className="text-sm">{link.name}</div>
