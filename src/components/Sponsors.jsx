@@ -40,11 +40,10 @@ function Sponsors() {
 
     return (
         <div className="w-full flex gap-8">
-            <Sidebar />
-            <div className="bg-gray-100 flex flex-1 flex-col px-1">
+            <div className="flex flex-1 flex-col px-1 py-6 mt-6 mx-8">
                 <h1 className="text-xl font-bold mb-2">Search by company or business</h1>
                 <hr className="w-full border-t-2 border-gray-300 mb-4" />
-                <div className="flex items-center gap-4 w-full pr-8">
+                <div className="lg:flex lg:items-center gap-4 w-full pr-8">
                     <input
                         type="text"
                         value={searchTerm}
@@ -52,7 +51,7 @@ function Sponsors() {
                         placeholder="Enter company name ..."
                         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-800"
                     />
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-end justify-end mt-3 lg:mt-0">
                         <button
                             onClick={handleSearch}
                             className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
@@ -72,13 +71,13 @@ function Sponsors() {
                     <hr className="w-full border-t-2 border-gray-300 mb-4" />
                     <div className="flex flex-col gap-4 w-full pr-8">
                         <div className="flex gap-2 p-2 text-gray-500">
-                            <div className="w-2/4 ">
+                            <div className="w-2/5 ">
                                 <h3 className="text-sm font-bold">Company</h3>
                             </div>
-                            <div className="w-1/4">
+                            <div className="w-1/5">
                                 <h3 className="text-sm font-bold">Location</h3>
                             </div>
-                            <div className="w-1/4">
+                            <div className="w-2/5">
                                 <h3 className="text-sm font-bold">Licence Tiers</h3>
                             </div>
                         </div>
@@ -86,14 +85,14 @@ function Sponsors() {
                         <div className='flex flex-col gap-3'>
                             {
                                 searchResults.sponsors && searchResults.sponsors.map((sponsor) => (
-                                    <div key={sponsor._id} className="flex gap-2 bg-white px-2 rounded-md py-4">
-                                        <div className="w-2/4" onClick={() => { openModal(sponsor) }}>
-                                            <h3 className="text-sm font-light text-red-400 underline underline-offset-4 cursor-pointer">{sponsor["Organisation Name"]}</h3>
+                                    <div key={sponsor._id} className="flex gap-2 bg-white px-2 rounded-md py-4 overflow-y-auto max-h-64">
+                                        <div className="w-2/5" onClick={() => { openModal(sponsor) }}>
+                                            <h1 className="text-xl font-semibold underline underline-offset-4 cursor-pointer">{sponsor["Organisation Name"]}</h1>
                                         </div>
                                         <div className="w-1/4">
                                             <h3 className="text-sm font-light">{`${sponsor["Town/City"]}${sponsor["County"] ? `, ${sponsor["County"]}` : ''}`}</h3>
                                         </div>
-                                        <div className="w-1/4">
+                                        <div className="w-2/4">
                                             <h3 className="text-sm font-light">{`${sponsor["Type & Rating"]}${sponsor["Route"] ? ` - ${sponsor["Route"]}` : ''}`}</h3>
                                         </div>
                                     </div>

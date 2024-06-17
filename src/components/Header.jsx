@@ -1,7 +1,7 @@
 export default function Header() {
 	return (
-		<header className="w-screen px-4 py-6 flex items-center">
-			<div className="flex space-x-5 items-center">
+		<header className="w-screen px-4 py-6 flex justify-center">
+			<div className="flex flex-col space-x-5 items-center">
 			<div>
 				<svg
 					ariaHidden="true"

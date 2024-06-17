@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const sideBardLinks = [
@@ -64,24 +65,61 @@ const sideBardLinks = [
 
 function Sidebar() {
     const navigate = useNavigate();
+    // Initialize `isOpen` based on screen width
+    const [isOpen, setIsOpen] = React.useState(window.innerWidth >= 768);
+
+    // Update the state upon resizing
+    React.useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth >= 768) {
+                setIsOpen(true);
+            } else {
+                setIsOpen(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        // Cleanup the event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <div className="w-full">
-            <ul className="flex flex-col p-6 bg-white gap-2">
-                {sideBardLinks.map((link) => (
-                    // <Link to={link.path}>
-                    <li
-                        className="flex gap-2 items-center cursor-pointer hover:text-gray-800 hover:underline"
-                        key={link.name}
-                        onClick={() => { navigate(link.path) }}
-                    >
-                        <span className="text-gray-800">{link.icon}</span>
-                        <span className="text-sm">{link.name}</span>
-                    </li>
-                    // </Link>
-                ))}
-            </ul>
+            <div className="flex justify-end mr-6">
+            <button 
+                className="p-2 text-gray-800 bg-white rounded-md mb-2 md:hidden" // Hide button on md screens and above
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                {isOpen ? (
+                  
+                   <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                   </svg>
+                ) : (
+                    
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+                )}
+            </button>
+            </div>
+
+            {isOpen && (
+                <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 justify-around p-3 bg-white gap-2 mb-2">
+                    {sideBardLinks.map((link) => (
+                        <div
+                            className="flex gap-2 items-center cursor-pointer hover:text-gray-800 hover:underline"
+                            key={link.name}
+                            onClick={() => { navigate(link.path); setIsOpen(false); }}
+                        >   
+                            <div className="text-gray-800">{link.icon}</div>
+                            <div className="text-sm">{link.name}</div>
+                        </div>
+                    ))}
+                </ul>
+            )}
         </div>
-    )
+    );
 }
 
 export default Sidebar;
