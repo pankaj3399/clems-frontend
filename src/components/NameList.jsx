@@ -7,7 +7,7 @@ const AdditionIcon = () => (
 	<svg
 		ariaHidden="true"
 		focusable="false"
-		className="text-green-400 w-4 h-4"
+		className="text-green-400 w-6 h-6"
 		role="img"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 448 512"
@@ -23,7 +23,7 @@ const UpdatedIcon = () => (
 	<svg
 		ariaHidden="true"
 		focusable="false"
-		className="text-blue-400 w-4 h-4"
+		className="text-blue-400 w-6 h-6"
 		role="img"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 448 512"
@@ -39,7 +39,7 @@ const RemovedIcon = () => (
 	<svg
 		ariaHidden="true"
 		focusable="false"
-		className="text-red-400 w-4 h-4"
+		className="text-red-400 w-6 h-6"
 		role="img"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 448 512"
@@ -74,13 +74,13 @@ export default function NameList({ title = "", list = [] }) {
 	function getIconTextColor(title) {
 		switch (title) {
 			case "Added":
-				return "text-green-400"
+				return "text-green-500"
 			case "Updated":
-				return "text-blue-400"
+				return "text-gray-800"
 			case "Removed":
-				return "text-red-400"
+				return "text-red-500"
 			default:
-				return "text-green-400"
+				return "text-green-500"
 		}
 	}
 
@@ -98,22 +98,22 @@ export default function NameList({ title = "", list = [] }) {
 	}
 
 	return (
-		<ul className="flex flex-1 flex-col p-6 gap-2 rounded-md bg-white max-h-max text-sm">
-			<h2
-				className={`text-base font-bold mb-2 flex gap-2 items-center ${getIconTextColor(
-					title
-				)}`}
+		<>
+		<ul className="border-2 border-gray-800 p-2 rounded col-span-3 lg:col-span-1 w-full mt-3 list-disc list-inside">
+			<div
+				className={`text-lg bg-gray-600 space-x-3 text-white py-3 text-center font-bold mb-2 flex gap-2 items-center justify-center`}
 			>
 				<span>{getIcon(title)}</span>
 				<span>
-					{title}: {list.length} companies
+					{title} : {list.length} companies
 				</span>
-			</h2>
+			</div>
+			<div className="mx-4 mt-4">
 			{list && list.length > 0 ? (
 				list.slice(0, showCounter).map((row) => (
 					<li
 						key={row._id}
-						className="cursor-pointer underline hover:text-red-400"
+						className="cursor-pointer my-2 hover:underline hover:font-semibold"
 						onClick={() => { openModal(row) }}
 					>
 						{row.name}
@@ -124,18 +124,16 @@ export default function NameList({ title = "", list = [] }) {
 					<Loader />
 				</div>
 			)}
+			</div>
 			<Modal
 				isOpen={isModalOpen}
 				closeModal={closeModal}
 				data={selectedRow}
 			/>
-
 			{showCounter <= list.length && (
 				<>
 					<div
-						className={`hover:text-red-500 cursor-pointer text-sm ${getIconTextColor(
-							title
-						)}`}
+						className={`underline font-semibold hover:font-bold cursor-pointer text-lg`}
 						onClick={onSetShowCounter}
 					>
 						... and {list.length - showCounter} more
@@ -143,5 +141,7 @@ export default function NameList({ title = "", list = [] }) {
 				</>
 			)}
 		</ul>
+		
+		</>
 	)
 }

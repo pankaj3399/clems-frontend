@@ -8,7 +8,7 @@ const sideBardLinks = [
             <svg
                 ariaHidden="true"
                 focusable="false"
-                className="w-4 h-4"
+                className="w-6 h-6"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
@@ -29,7 +29,7 @@ const sideBardLinks = [
                 focusable="false"
                 data-prefix="fas"
                 data-icon="certificate"
-                className="w-4 h-4"
+                className="w-6 h-6"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -65,17 +65,17 @@ const sideBardLinks = [
 function Sidebar() {
     const navigate = useNavigate();
     return (
-        <div className="flex-1 max-w-xs">
+        <div className="w-full">
             <ul className="flex flex-col p-6 bg-white gap-2">
                 {sideBardLinks.map((link) => (
                     // <Link to={link.path}>
                     <li
-                        className="flex gap-2 items-center underline cursor-pointer hover:text-red-500"
+                        className="flex gap-2 items-center cursor-pointer hover:text-gray-800 hover:underline"
                         key={link.name}
                         onClick={() => { navigate(link.path) }}
                     >
-                        <span>{link.icon}</span>
-                        <span>{link.name}</span>
+                        <span className="text-gray-800">{link.icon}</span>
+                        <span className="text-sm">{link.name}</span>
                     </li>
                     // </Link>
                 ))}

@@ -28,32 +28,32 @@ export default function ({
                         (
                             <div className="p-4">
                                 <h2 className="text-center text-xl font-bold mb-4">{data?.["Organisation Name"]}</h2>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Location:</span>{" "}
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Location</h1>{" "}
                                     {data?.["Town/City"]}{data?.["County"] ? `, ${data?.["County"]}` : ""}
-                                </p>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Licence Tiers:</span>{" "}
+                                </div>
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Licence Tiers</h1>{" "}
                                     {data?.["Type & Rating"]}{data?.["Route"] ? ` - ${data?.["Route"]}` : ""}
-                                </p>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Date:</span> {data?.date}
-                                </p>
+                                </div>
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Date</h1> {data?.date}
+                                </div>
                             </div>
                         ) : (
                             <div className="p-4">
                                 <h2 className="text-center text-xl font-bold mb-4">{data?.name}</h2>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Location:</span>{" "}
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Location</h1>{" "}
                                     {data?.townCity}{data?.county ? `, ${data?.county}` : ""}
-                                </p>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Licence Tiers:</span>{" "}
+                                </div>
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Licence Tiers</h1>{" "}
                                     {data?.type}{data?.route ? ` - ${data?.route}` : ""}
-                                </p>
-                                <p className="text-sm mb-2">
-                                    <span className="font-semibold">Date:</span> {data?.date}
-                                </p>
+                                </div>
+                                <div className="text-sm mb-3">
+                                    <h1 className="font-semibold text-xl mb-2">Date</h1> {data?.date}
+                                </div>
                             </div>
                         )
                 }

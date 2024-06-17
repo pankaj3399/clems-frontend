@@ -14,7 +14,7 @@ export default function Footer() {
 			</div>
 			<div>
 				<ul className="flex justify-center items-center gap-4">
-					<li>
+					{/* <li>
 						<a href="/toc" className="flex gap-2 items-center underline">
 							<svg
 								ariaHidden="true"
@@ -31,7 +31,7 @@ export default function Footer() {
 							</svg>{" "}
 							<span>Terms & Conditions</span>
 						</a>
-					</li>
+					</li> */}
 					{/* <li>
 						<a href="/toc" className="flex gap-2 items-center underline">
 							<svg
@@ -68,7 +68,7 @@ export default function Footer() {
 							<span>Privary Policy</span>
 						</a>
 					</li> */}
-					<li>
+					{/* <li>
 						<a
 							href="https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers"
 							className="flex gap-2 items-center underline"
@@ -88,7 +88,7 @@ export default function Footer() {
 							</svg>
 							<span>GOV.UK</span>
 						</a>
-					</li>
+					</li> */}
 				</ul>
 			</div>
 		</footer>

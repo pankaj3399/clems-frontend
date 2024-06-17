@@ -50,12 +50,12 @@ function Sponsors() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Enter company name ..."
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-800"
                     />
                     <div className="flex gap-2">
                         <button
                             onClick={handleSearch}
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
                         >
                             Search
                         </button>

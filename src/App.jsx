@@ -67,63 +67,61 @@ function App() {
 	}
 
 	return (
-		<div className="w-full flex gap-8">
-			<Sidebar />
-			<div className="flex-1 flex flex-col gap-6">
-				<div>
-					<h1 className="text-xl mb-2 font-bold">
-						Updated Licences on{" "}
-						{new Date(updateDate).toLocaleDateString("en-GB", {
-							day: "2-digit",
-							month: "short",
-							year: "numeric",
-						})}
+		<>
+		<div className="mt-5">
+			<div>
+				<div className="border-t-4 border-b-4 border-gray-800 py-2 mb-4">
+					<h1 className="text-center text-xl lg:text-2xl font-bold">
+					Updated Licenses on{" "}
+									{new Date(updateDate).toLocaleDateString("en-GB", {
+										day: "2-digit",
+										month: "short",
+										year: "numeric",
+									})}
 					</h1>
-					<hr className="w-full h-[2px] bg-gray-400 mb-4" />
-					<div className="flex gap-6">
-						<NameList title="Added" list={additions} />
-						<NameList title="Updated" list={updates} />
-						<NameList title="Removed" list={removals} />
-					</div>
 				</div>
-
-				{historyData.map((history) => (
-					<div>
-						<>
-							<h1 className="text-xl mb-2 font-bold">
-								Updated Licences on{" "}
-								{new Date(history.updateDate).toLocaleDateString("en-GB", {
-									day: "2-digit",
-									month: "short",
-									year: "numeric",
-								})}
-							</h1>
-							<hr className="w-full h-[2px] bg-gray-400 mb-4" />
-
-							<div className="max-w-6xl mx-auto flex gap-6">
-								<NameList title="Added" list={history.additions} />
-								<NameList title="Updated" list={history.updates} />
-								<NameList title="Removed" list={history.removals} />
-							</div>
-						</>
-					</div>
-				))}
-
-				<div className="w-full flex justify-center items-center mt-10">
-					{noMoreHistory ? (
-						<div>Nothing More To Show :)</div>
-					) : (
-						<button
-							className="px-10 rounded-md bg-green-700 text-white font-bold h-14 hover:opacity-95"
-							onClick={onShowHistory}
-						>
-							Show More
-						</button>
-					)}
+				<div className="grid grid-cols-3 lg:gap-x-4 mx-8">
+					<NameList title="Added" list={additions} />
+					<NameList title="Updated" list={updates} />
+					<NameList title="Removed" list={removals} />
 				</div>
 			</div>
-			<div></div>
+
+			{historyData.map((history) => (
+				<div className="mt-6">
+					<div className="border-t-4 border-b-4 border-gray-800 py-2 mb-4">
+					<h1 className="text-center text-xl lg:text-2xl font-bold">
+							Updated Licences on{" "}
+							{new Date(history.updateDate).toLocaleDateString("en-GB", {
+								day: "2-digit",
+								month: "short",
+								year: "numeric",
+							})}
+						</h1>
+				</div>
+				<div className="grid grid-cols-3 lg:gap-x-4 mx-8">
+					<NameList title="Added" list={history.additions} />
+					<NameList title="Updated" list={history.updates} />
+					<NameList title="Removed" list={history.removals} />
+					</div>
+				</div>
+			))}
 		</div>
+
+		<div className="w-full flex justify-center items-center mt-10">
+			{noMoreHistory ? (
+				<div>Nothing More To Show :)</div>
+			) : (
+				<button
+					className="px-10 py-3 rounded-sm bg-gray-800 text-white font-bold"
+					onClick={onShowHistory}
+				>
+					SHOW MORE
+				</button>
+			)}
+		</div>
+
+		</>
 	)
 }
 
