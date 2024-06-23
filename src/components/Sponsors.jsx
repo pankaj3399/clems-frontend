@@ -455,13 +455,8 @@ function Sponsors() {
         );
         const data = await res.json();
 
-        console.log(data);
         if (isInitial) {
-            setSearchResults({
-                count: 20,
-                countTotal: data.countTotal,
-                sponsors: data.sponsors.slice(0, 20),
-            });
+            setSearchResults(data);
         } else {
             setSearchResults(data);
         }
