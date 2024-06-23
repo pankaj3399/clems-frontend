@@ -448,7 +448,7 @@ function Sponsors() {
         setIsModalOpen(false);
     };
 
-    async function fetchData(searchData) {
+    async function fetchData(searchData, isInitial = false) {
         const res = await fetch(
             `${import.meta.env.VITE_SERVER_URL
             }/sponsors?search=${searchData}&city=${selectedCity}&category=${selectedCategory}`
@@ -456,7 +456,15 @@ function Sponsors() {
         const data = await res.json();
 
         console.log(data);
-        setSearchResults(data);
+        if (isInitial) {
+            setSearchResults({
+                count: 20,
+                countTotal: data.countTotal,
+                sponsors: data.sponsors.slice(0, 20),
+            });
+        } else {
+            setSearchResults(data);
+        }
     }
 
     const handleSearch = () => {
@@ -483,6 +491,7 @@ function Sponsors() {
     React.useEffect(() => {
         if (!initialized.current) {
             initialized.current = true;
+            fetchData("", true);
             fetchCities().then((data) => setCities(data));
         }
     }, []);
@@ -494,7 +503,7 @@ function Sponsors() {
                     Search by company or business
                 </h1>
                 <hr className="w-full border-t-2 border-gray-300 mb-4" />
-                <div className="lg:flex lg:items-end gap-4 w-full pr-8">
+                <div className="lg:flex lg:items-end gap-4 w-full">
                     <input
                         type="text"
                         value={searchTerm}
@@ -502,7 +511,7 @@ function Sponsors() {
                         placeholder="Enter company name ..."
                         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-800"
                     />
-                    <div className="flex gap-2 items-end justify-center mt-3 lg:mt-0 w-full">
+                    <div className="flex flex-col sm:flex-row gap-2 items-end justify-center mt-3 lg:mt-0 w-full">
                         <button
                             onClick={toggleAdvancedSearch}
                             className="bg-[#2f3c69] text-white px-4 py-2 min-w-fit rounded hover:bg-gray-800 focus:outline-none w-full"
@@ -523,7 +532,7 @@ function Sponsors() {
                         </button>
                     </div>
                 </div>
-                {showAdvancedSearch && <div className="w-full flex space-x-3 mt-4 pr-8">
+                {showAdvancedSearch && <div className="w-full flex space-x-3 mt-4">
                     <Popover className="w-full">
                         <PopoverTrigger asChild>
                             <Button
@@ -574,14 +583,19 @@ function Sponsors() {
                         </SelectTrigger>
                         <SelectContent>
                             {Object.keys(categories).map((category, index) => (
-                                <SelectGroup key={`${category}${index}`}>
-                                    <SelectLabel>{category}</SelectLabel>
-                                    {categories[category].map((item, index) => (
-                                        <SelectItem key={`${item}${index}`} value={item}>
-                                            {item}
-                                        </SelectItem>
-                                    ))}
-                                </SelectGroup>
+                                //  {categories[category].map((item, index) => (
+                                    <SelectItem key={`${category}${index}`} value={category}>
+                                        {category}
+                                    </SelectItem>
+                                // ))}
+                                // <SelectGroup key={`${category}${index}`}>
+                                //     <SelectLabel>{category}</SelectLabel>
+                                //     {categories[category].map((item, index) => (
+                                //         <SelectItem key={`${item}${index}`} value={item}>
+                                //             {item}
+                                //         </SelectItem>
+                                //     ))}
+                                // </SelectGroup>
                             ))}
                         </SelectContent>
                     </Select>
