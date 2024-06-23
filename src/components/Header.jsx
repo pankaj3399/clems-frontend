@@ -88,7 +88,7 @@ const Navbar = () => {
 	}, [window.innerWidth]);
 
 	return (
-		<nav className="bg-white shadow-lg lg:text-lg mb-2">
+		<nav className="bg-white shadow-lg lg:text-lg">
 			<div className="max-w-6xl mx-auto px-4">
 				<div className="flex justify-between">
 					{/* <!-- logo --> */}

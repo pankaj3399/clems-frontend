@@ -9,7 +9,7 @@ import {
 
 function CarouselSection() {
 	return (
-		<div className="w-full bg-gray-800 py-4 mt-5">
+		<div className="w-full bg-[#2f3c69] py-4 mt-5">
 			<h1 className="text-white ml-4 font-semibold text-3xl">Our Client and Partners</h1>
 			<div className="flex items-center justify-center mt-6">
 			<Carousel

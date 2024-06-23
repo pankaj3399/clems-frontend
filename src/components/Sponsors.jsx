@@ -424,6 +424,8 @@ async function fetchCities() {
 function Sponsors() {
     const initialized = React.useRef(false);
 
+    const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -463,6 +465,13 @@ function Sponsors() {
         fetchData(searchTerm);
     };
 
+    const toggleAdvancedSearch = () => {
+        setShowAdvancedSearch(!showAdvancedSearch);
+        setCityInput("");
+        setSelectedCity("");
+        setSelectedCategory("");
+    }
+
     const handleClear = () => {
         setSearchTerm("");
         setCityInput("");
@@ -485,7 +494,7 @@ function Sponsors() {
                     Search by company or business
                 </h1>
                 <hr className="w-full border-t-2 border-gray-300 mb-4" />
-                <div className="lg:flex lg:items-center gap-4 w-full pr-8">
+                <div className="lg:flex lg:items-end gap-4 w-full pr-8">
                     <input
                         type="text"
                         value={searchTerm}
@@ -493,86 +502,90 @@ function Sponsors() {
                         placeholder="Enter company name ..."
                         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-gray-800"
                     />
-                    <div className="flex gap-2 items-end justify-center mt-3 lg:mt-0">
-                        <div>
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        variant="outline"
-                                        role="combobox"
-                                        className="w-[200px] justify-between font-bold"
-                                    >
-                                        {selectedCity != "" ? selectedCity : "Select a city"}
-                                        <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-[200px] p-0">
-                                    <Command>
-                                        <CommandInput onInput={(e) => setCityInput(e.target.value)} placeholder="Enter city..." className="h-9" />
-                                        <CommandList>
-                                            {cityInput.length > 3  && <CommandEmpty>No City found.</CommandEmpty> }
-                                            <CommandGroup>
-                                                {cityInput.length > 3 && cities.map((city, index) => {
-                                                    if (city.toLowerCase().includes(cityInput.toLowerCase())) {
-                                                        return (
-                                                            <CommandItem
-                                                                key={`${city}${index}`}
-                                                                value={city}
-                                                                onSelect={(currentValue) => {
-                                                                    setSelectedCity(currentValue);
-                                                                    setCityInput("");
-                                                                }}
-                                                            >
-                                                                {city}
-                                                                <CheckIcon
-                                                                    className={cn(
-                                                                        "ml-auto h-4 w-4",
-                                                                        selectedCity === city ? "opacity-100" : "opacity-0"
-                                                                    )}
-                                                                />
-                                                            </CommandItem>
-                                                        )
-                                                    }
-                                                })}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
-                        </div>
-                        <div>
-                            <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value)}>
-                                <SelectTrigger className="w-[280px] font-bold">
-                                    <SelectValue placeholder="Select a Category" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {Object.keys(categories).map((category, index) => (
-                                        <SelectGroup key={`${category}${index}`}>
-                                            <SelectLabel>{category}</SelectLabel>
-                                            {categories[category].map((item, index) => (
-                                                <SelectItem key={`${item}${index}`} value={item}>
-                                                    {item}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectGroup>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                        </div>
+                    <div className="flex gap-2 items-end justify-center mt-3 lg:mt-0 w-full">
+                        <button
+                            onClick={toggleAdvancedSearch}
+                            className="bg-[#2f3c69] text-white px-4 py-2 min-w-fit rounded hover:bg-gray-800 focus:outline-none w-full"
+                        >
+                            {showAdvancedSearch ? "Hide" : "Show"} Advanced Search
+                        </button>
                         <button
                             onClick={handleSearch}
-                            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none"
+                            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none w-full"
                         >
                             Search
                         </button>
                         <button
                             onClick={handleClear}
-                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none"
+                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none w-full"
                         >
                             Clear
                         </button>
                     </div>
                 </div>
+                {showAdvancedSearch && <div className="w-full flex space-x-3 mt-4 pr-8">
+                    <Popover className="w-full">
+                        <PopoverTrigger asChild>
+                            <Button
+                                variant="outline"
+                                role="combobox"
+                                className="w-full justify-between font-bold"
+                            >
+                                {selectedCity != "" ? selectedCity : "Select a city"}
+                                <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                            <Command>
+                                <CommandInput onInput={(e) => setCityInput(e.target.value)} placeholder="Enter city..." className="h-9" />
+                                <CommandList>
+                                    {cityInput.length > 3 && <CommandEmpty>No City found.</CommandEmpty>}
+                                    <CommandGroup>
+                                        {cityInput.length > 3 && cities.map((city, index) => {
+                                            if (city.toLowerCase().includes(cityInput.toLowerCase())) {
+                                                return (
+                                                    <CommandItem
+                                                        key={`${city}${index}`}
+                                                        value={city}
+                                                        onSelect={(currentValue) => {
+                                                            setSelectedCity(currentValue);
+                                                            setCityInput("");
+                                                        }}
+                                                    >
+                                                        {city}
+                                                        <CheckIcon
+                                                            className={cn(
+                                                                "ml-auto h-4 w-4",
+                                                                selectedCity === city ? "opacity-100" : "opacity-0"
+                                                            )}
+                                                        />
+                                                    </CommandItem>
+                                                )
+                                            }
+                                        })}
+                                    </CommandGroup>
+                                </CommandList>
+                            </Command>
+                        </PopoverContent>
+                    </Popover>
+                    <Select value={selectedCategory} onValueChange={(value) => setSelectedCategory(value)}>
+                        <SelectTrigger className="w-full font-bold">
+                            <SelectValue placeholder="Select a Category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {Object.keys(categories).map((category, index) => (
+                                <SelectGroup key={`${category}${index}`}>
+                                    <SelectLabel>{category}</SelectLabel>
+                                    {categories[category].map((item, index) => (
+                                        <SelectItem key={`${item}${index}`} value={item}>
+                                            {item}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>}
 
                 <div className="mt-8 px-1">
                     <h2 className="text-md font-bold mb-2">
