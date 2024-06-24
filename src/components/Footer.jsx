@@ -1,7 +1,9 @@
+import Sticky from "./Sticky";
+
 export default function Footer() {
 	return (
-		<footer className="w-full h-40 pl-10 pr-20 mt-6 py-6 flex bg-gray-800 text-white justify-between">
-			<div className="flex flex-col gap-2 text-sm">
+		<footer className="w-full  mt-6 py-6 bg-gray-800 text-white justify-between">
+			<div className="flex flex-col gap-2 text-sm pl-10 pr-20">
 				Disclaimer: Data extracted from{" "}
 				<a
 					href="https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers"
@@ -9,7 +11,11 @@ export default function Footer() {
 				>
 					Register of licensed sponsors at GOV.UK
 				</a>
-				<br />
+			</div>
+			<div className="text-lg lg:text-xl font-semibold text-center bg-[#2f3c69] my-4 py-2 w-full mx-0">
+				<h1>Your feedback would help us improve the service</h1>
+			</div>
+			<div className="flex flex-col gap-2 text-sm pl-10 pr-20">
 				This website is not affiliated to government.
 			</div>
 			<div>

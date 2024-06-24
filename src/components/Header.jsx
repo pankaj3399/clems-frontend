@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const sideBardLinks = [
 	{
-		name: "Last updates",
+		name: "Latest updates",
 		path: "/",
 		icon: (
 			<svg

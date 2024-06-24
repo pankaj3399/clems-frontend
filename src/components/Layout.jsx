@@ -11,10 +11,9 @@ export default function Layout({ children }) {
 			
 			<div className="fixed inset-x-0 z-50 bg-gray-800 h-fit">
 				<Header />
-				<Sticky />
 			</div>
 
-			<main className="flex-1 mt-44">
+			<main className="flex-1 mt-24">
 				<Outlet />
 			</main>
 			
