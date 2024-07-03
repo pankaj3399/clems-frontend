@@ -423,6 +423,12 @@ async function fetchCities() {
 
 function Sponsors() {
     const initialized = React.useRef(false);
+    const [showCounter, setShowCounter] = useState(20);
+    function onSetShowCounter() {
+        if (showCounter < list.length) {
+            setShowCounter(showCounter + 20)
+        }
+    }
 
     const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
 
@@ -448,15 +454,25 @@ function Sponsors() {
         setIsModalOpen(false);
     };
 
-    async function fetchData(searchData, isInitial = false) {
-        const res = await fetch(
-            `${import.meta.env.VITE_SERVER_URL
-            }/sponsors?search=${searchData}&city=${selectedCity}&category=${selectedCategory}`
-        );
-        const data = await res.json();
+    async function fetchData(searchData = "", isInitial = false) {
+        let data;
+        if (searchData !== "" || selectedCity !== "" || selectedCategory !== "") {
+            const res = await fetch(
+                `${import.meta.env.VITE_SERVER_URL
+                }/sponsors?search=${searchData}&city=${selectedCity}&category=${selectedCategory}`
+            );
+            data = await res.json();
+        } else {
+            const res = await fetch(
+                `${import.meta.env.VITE_SERVER_URL
+                }/sponsors?limit=${searchResults.count ? parseInt(searchResults.count) + 20 : 20}`
+            );
+            data = await res.json();
+        }
 
         if (isInitial) {
             setSearchResults(data);
+
         } else {
             setSearchResults(data);
         }
@@ -579,14 +595,14 @@ function Sponsors() {
                         <SelectContent>
                             {Object.keys(categories).map((category, index) => (
                                 //  {categories[category].map((item, index) => (
-                                    <SelectItem key={`${category}${index}`} value={category}>
-                                        {category}
-                                    </SelectItem>
+                                <SelectItem key={`${category}${index}`} value={category}>
+                                    {category}
+                                </SelectItem>
                                 // ))}
-                                // <SelectGroup key={`${category}${index}`}>
+                                // <SelectGroup key={`${ category }${ index }`}>
                                 //     <SelectLabel>{category}</SelectLabel>
                                 //     {categories[category].map((item, index) => (
-                                //         <SelectItem key={`${item}${index}`} value={item}>
+                                //         <SelectItem key={`${ item }${ index }`} value={item}>
                                 //             {item}
                                 //         </SelectItem>
                                 //     ))}
@@ -651,6 +667,17 @@ function Sponsors() {
                                 data={selectedRow}
                                 fromSponsors={true}
                             />
+                            {searchResults.count < searchResults.countTotal && searchTerm === "" &&
+                                selectedCity === "" && selectedCategory === "" && (
+                                    <>
+                                        <div
+                                            className={`underline font - semibold hover: font - bold cursor - pointer text - lg`}
+                                            onClick={() => { fetchData(searchTerm) }}
+                                        >
+                                            ... and {searchResults.countTotal - searchResults.count} more
+                                        </div>
+                                    </>
+                                )}
                         </div>
                     </div>
                 </div>

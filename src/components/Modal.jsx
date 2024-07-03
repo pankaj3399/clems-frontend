@@ -1,16 +1,28 @@
+import { useState } from "react";
+import EmailSubScriptionModal from "./EmailSubScriptionModal";
+
 export default function ({
     isOpen,
     closeModal,
     data,
     fromSponsors = false
 }) {
+    const [isFollowModalOpen, setIsFollowModalOpen] = useState(false);
+    const openFollowModal = () => {
+        setIsFollowModalOpen(true);
+    };
+
+    const closeFollowModal = () => {
+        setIsFollowModalOpen(false);
+    };
+
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-45 flex">
             <div className="relative p-8 bg-white max-w-md m-auto flex-col flex rounded-lg">
                 <button
-                    onClick={closeModal}
+                    onClick={() => { closeFollowModal(); closeModal() }}
                     className="absolute top-0 right-0 p-4 text-gray-500 hover:text-gray-700 focus:outline-none"
                 >
                     <svg
@@ -39,6 +51,11 @@ export default function ({
                                 <div className="text-sm mb-3">
                                     <h1 className="font-semibold text-xl mb-2">Date</h1> {data?.date}
                                 </div>
+                                {
+                                    !isFollowModalOpen && <button type="submit" className="w-full p-2 mt-4 hover:bg-blue-950 bg-blue-900 text-white rounded-lg" onClick={() => { openFollowModal(data?.["Organisation Name"]) }}>
+                                        Follow this company
+                                    </button>
+                                }
                             </div>
                         ) : (
                             <div className="p-4">
@@ -54,9 +71,19 @@ export default function ({
                                 <div className="text-sm mb-3">
                                     <h1 className="font-semibold text-xl mb-2">Date</h1> {data?.date}
                                 </div>
+                                {
+                                    !isFollowModalOpen && <button type="submit" className="w-full p-2 mt-4 hover:bg-blue-950 bg-blue-900 text-white rounded-lg" onClick={openFollowModal}>
+                                        Follow this company
+                                    </button>
+                                }
                             </div>
                         )
                 }
+                <EmailSubScriptionModal
+                    isOpen={isFollowModalOpen}
+                    closeModal={closeFollowModal}
+                    name={fromSponsors ? data?.["Organisation Name"] : data?.name}
+                />
             </div>
         </div>
     );

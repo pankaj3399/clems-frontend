@@ -99,49 +99,48 @@ export default function NameList({ title = "", list = [] }) {
 
 	return (
 		<>
-		<ul className="border-2 border-gray-800 p-2 rounded col-span-3 lg:col-span-1 w-full mt-3 list-disc list-inside">
-			<div
-				className={`text-lg bg-gray-600 space-x-3 text-white py-3 text-center font-bold mb-2 flex gap-2 items-center justify-center`}
-			>
-				<span>{getIcon(title)}</span>
-				<span>
-					{title} : {list.length} companies
-				</span>
-			</div>
-			<div className="mx-4 mt-4">
-			{list && list.length > 0 ? (
-				list.slice(0, showCounter).map((row) => (
-					<li
-						key={row._id}
-						className="cursor-pointer my-2 hover:underline hover:font-semibold"
-						onClick={() => { openModal(row) }}
-					>
-						{row.name}
-					</li>
-				))
-			) : (
-				<div className="py-6">
-					<Loader />
+			<ul className="border-2 border-gray-800 p-2 rounded col-span-3 lg:col-span-1 w-full mt-3 list-disc list-inside">
+				<div
+					className={`text-lg bg-gray-600 space-x-3 text-white py-3 text-center font-bold mb-2 flex gap-2 items-center justify-center`}
+				>
+					<span>{getIcon(title)}</span>
+					<span>
+						{title} : {list.length} companies
+					</span>
 				</div>
-			)}
-			</div>
-			<Modal
-				isOpen={isModalOpen}
-				closeModal={closeModal}
-				data={selectedRow}
-			/>
-			{showCounter <= list.length && (
-				<>
-					<div
-						className={`underline font-semibold hover:font-bold cursor-pointer text-lg`}
-						onClick={onSetShowCounter}
-					>
-						... and {list.length - showCounter} more
-					</div>
-				</>
-			)}
-		</ul>
-		
+				<div className="mx-4 mt-4">
+					{list && list.length > 0 ? (
+						list.slice(0, showCounter).map((row) => (
+							<li
+								key={row._id}
+								className="cursor-pointer my-2 hover:underline hover:font-semibold"
+								onClick={() => { openModal(row) }}
+							>
+								{row.name}
+							</li>
+						))
+					) : (
+						<div className="py-6">
+							<Loader />
+						</div>
+					)}
+				</div>
+				<Modal
+					isOpen={isModalOpen}
+					closeModal={closeModal}
+					data={selectedRow}
+				/>
+				{showCounter <= list.length && (
+					<>
+						<div
+							className={`underline font-semibold hover:font-bold cursor-pointer text-lg`}
+							onClick={onSetShowCounter}
+						>
+							... and {list.length - showCounter} more
+						</div>
+					</>
+				)}
+			</ul>
 		</>
 	)
 }
