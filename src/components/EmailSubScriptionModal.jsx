@@ -4,6 +4,7 @@ import axios from "axios";
 export default function ({
     isOpen,
     closeModal,
+    closeDetailsModal,
     name,
 }) {
     const [email, setEmail] = useState("");
@@ -28,6 +29,7 @@ export default function ({
             if (res.status === 200) {
                 setEmail("");
                 closeModal();
+                closeDetailsModal();
             }
         } catch (error) {
             console.error(error);

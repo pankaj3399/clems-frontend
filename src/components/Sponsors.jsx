@@ -669,14 +669,14 @@ function Sponsors() {
                             />
                             {searchResults.count < searchResults.countTotal && searchTerm === "" &&
                                 selectedCity === "" && selectedCategory === "" && (
-                                    <>
-                                        <div
-                                            className={`underline font - semibold hover: font - bold cursor - pointer text - lg`}
+                                    <div className="w-full flex justify-center items-center mt-10">
+                                        <button
+                                            className="px-10 py-3 rounded-sm bg-gray-800 text-white font-bold"
                                             onClick={() => { fetchData(searchTerm) }}
                                         >
-                                            ... and {searchResults.countTotal - searchResults.count} more
-                                        </div>
-                                    </>
+                                            SHOW MORE
+                                        </button>
+                                    </div>
                                 )}
                         </div>
                     </div>

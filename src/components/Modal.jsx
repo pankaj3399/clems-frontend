@@ -82,6 +82,7 @@ export default function ({
                 <EmailSubScriptionModal
                     isOpen={isFollowModalOpen}
                     closeModal={closeFollowModal}
+                    closeDetailsModal={closeModal}
                     name={fromSponsors ? data?.["Organisation Name"] : data?.name}
                 />
             </div>
