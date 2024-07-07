@@ -111,7 +111,7 @@ const Navbar = () => {
 								<p className="py-5 cursor-pointer px-3 hover:underline">{link.name}</p>
 							</div>
 						))}
-
+						<a href="https://www.compliance-360.co.uk/" target="_blank" className="py-5 cursor-pointer px-3 hover:underline">Website</a>
 					</div>
 
 					{/* <!-- mobile button goes here --> */}
@@ -134,7 +134,9 @@ const Navbar = () => {
 						</div>
 					</div>
 				))}
-				
+				<div className="hover:bg-gray-800 hover:text-white">
+					<a href="https://www.compliance-360.co.uk/" target="_blank" className="block py-2 cursor-pointer px-3 hover:underline">Website</a>
+				</div>
 			</div>
 		</nav>
 	);
